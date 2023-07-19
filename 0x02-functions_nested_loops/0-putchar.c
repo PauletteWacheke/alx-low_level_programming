@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "main.h"
 /**
  * main - Prints _putchar
@@ -12,10 +11,10 @@ int main(void)
 
 	while (string[i] != '\0')
 	{
-		putchar(string[i]);
+		_putchar(string[i]);
 		i++;
 	}
-	putchar('\n');
+	_putchar('\n');
 
 	return (0);
 }
