@@ -9,26 +9,26 @@
  */
 char *cap_string(char *str)
 {
-	int i = 0;
 	int capitalize_next = 1;
+		char *ptr = str;
 
-	while (str[i] != '\0')
-	{
-		if (isspace(str[i]) || str[i] == ',' || str[i] == ';' || str[i] == '.' || str[i] == '!' || str[i] == '?' || str[i] == '"' || str[i] == '(' || str[i] == ')' || str[i] == '{' || str[i] == '}')
+		while (*ptr)
 		{
-			capitalize_next = 1;
+			if(isspace(*ptr) || ispunct(*ptr))
+			{
+				capitalize_next = 1;
+			}
+			else if (capitalize_next)
+			{
+				*ptr = toupper(*ptr);
+				capitalize_next = 0;
+			}
+			else 
+			{
+				*ptr = tolower(*ptr);
+			}
+			ptr++;
 		}
-		else if (capitalize_next)
-		{
-			str[i] = toupper(str[i]);
-			capitalize_next = 0;
-		}
-		else
-		{
-			str[i] = tolower(str[i]);
-		}
-		i++;
-	}
-	return (str);
+		return (str);
 }
 
