@@ -2,7 +2,7 @@
 /**
  * _memset - function that fills memory with a constant byte
  * @s: char , pointer to the memory area where the filling will start
- * @b: char , constant byte that will be copied to each byte of the memory area.
+ * @b: char , constant byte to be copied..
  * @n: int , number of bytes to fill with the constant value
  *
  * Return: pointer to the memory area s
