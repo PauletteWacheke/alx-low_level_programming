@@ -16,7 +16,7 @@ int _strlen_recursion(char *s)
 		i = _strlen_recursion(s + 1);
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
 /**
@@ -29,7 +29,7 @@ int _scan(char *c, char *d)
 {
 	if (*c != *d)
 		return (0);
-	else if ( c >=d)
+	else if (c >= d)
 		return (1);
 	else
 		return (_scan(c + 1, d - 1));
