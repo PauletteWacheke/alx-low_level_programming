@@ -11,5 +11,7 @@ int natural_square(int x, int y);
 int is_prime_number(int n);
 int pnumber(int x, int n);
 int is_palindrome(char *s);
+int _strlen_recursion(char *s);
+int _scan(char *c, char *d);
 int wildcmp(char *s1, char *s2);
 #endif
