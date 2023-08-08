@@ -9,31 +9,37 @@
  */
 char *argstostr(int ac, char **av)
 {
-	int i, j, len = 0, total_len = 0;
-	char *concatenate;
+	int i, j, len = 0, k = 0;
+	char *str;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
 	for (i = 0; i < ac; i++)
 	{
 		for (j = 0; av[i][j]; j++)
-			len++;
-		total_len += len + 1;
+		len++;
 	}
+	len += ac;
 
-	concatenate = malloc(sizeof(char) * len + 1);
-	if (concatenate == NULL)
+	str = malloc(sizeof(char) * len + 1);
+
+	if (str == NULL)
 		return (NULL);
+
 	for (i = 0; i < ac; i++)
 	{
 		for (j = 0; av[i][j]; j++)
 		{
-			*concatenate = av[i][j];
-			concatenate++;
+			str[k] = av[i][j];
+			k++;
 		}
-		*concatenate = '\n';
-		concatenate++;
+
+		if (str[k] == '\0')
+		{
+			str[k++] = '\n';
+		}
+
 	}
-	*concatenate = '\0';
-	return (concatenate - total_len);
+
+	return (str);
 }
