@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 	int a, b;
 	char *s;
 
-	if (argc < 2)
+	if (argc != 2)
 	{
 		printf("Error\n");
 		exit(1);
@@ -32,3 +32,7 @@ int main(int argc, char **argv)
 	printf("%02hhx\n", s[b]);
 	return (0);
 }
+
+
+
+
