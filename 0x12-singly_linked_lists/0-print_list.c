@@ -6,9 +6,9 @@
  */
 size_t print_list(const list_t *h)
 {
-	unsigned int tally;
+	unsigned int size;
 
-	tally = 0;
+	size = 0;
 
 	while (h)
 	{
@@ -21,8 +21,8 @@ size_t print_list(const list_t *h)
 			printf(" [%i] %s\n", h->len, h->str);
 		}
 		h = h->next;
-		tally += 1;
+		size += 1;
 	}
 
-	return (tally);
+	return (size);
 }
