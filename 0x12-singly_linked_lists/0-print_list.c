@@ -22,5 +22,5 @@ size_t print_list(const list_t *h)
 		tally++;
 	}
 
-	return tally;
+	return (tally);
 }
