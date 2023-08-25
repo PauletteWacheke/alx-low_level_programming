@@ -1,7 +1,7 @@
 #include "lists.h"
 /**
  * print_list - function that prints all elements oa a list_t list.
- * @h: linked list
+ * @h: pointer to linked list
  * Return: number of nodes
  */
 size_t print_list(const list_t *h)
@@ -20,6 +20,7 @@ size_t print_list(const list_t *h)
 		{
 			printf(" [%i] %s\n", h->len, h->str);
 		}
+
 		h = h->next;
 		size += 1;
 	}
