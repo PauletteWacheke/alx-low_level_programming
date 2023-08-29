@@ -121,6 +121,7 @@ void get_prod(char *prod, char *mult, int digit, int zeroes)
 			printf("Error\n");
 			exit(98);
 		}
+
 		 num = (*mult - '0') * digit;
 		 num += tens;
 		 *prod = (num % 10) + '0';
