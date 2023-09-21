@@ -17,7 +17,7 @@ void close_elf(int elf);
  * @e_ident: pointer to an array containing the ELF magic numbers
  *
  * Description: if the file is not an ELF file - exit code 98
- */
+ */ 
 
 void check_elf(unsigned char *e_ident)
 {
@@ -47,10 +47,10 @@ void print_magic(unsigned char *e_ident)
 	int i;
 
 	printf("Magic: ");
-	for (i = 0; i < E!_NIDENT; i++)
+	for (i = 0; i < EI_NIDENT; i++)
 	{
 		printf("%02x", e_ident[i]);
-		if (i == E!_NIDENT -1)
+		if (i == EI_NIDENT -1)
 			printf("\n");
 		else
 			printf(" ");
@@ -64,7 +64,7 @@ void print_magic(unsigned char *e_ident)
 void print_class(unsigned char *e_ident)
 {
 	printf("Class: ");
-	switch (e_ident[E!_CLASS])
+	switch (e_ident[EI_CLASS])
 	{
 		case ELFCLASSNONE:
 			printf("none\n");
@@ -76,7 +76,7 @@ void print_class(unsigned char *e_ident)
 			printf("ELF64\n");
 			break;
 		default:
-			printf("<unknown: %x>\n", e_ident[E!_CLASS]);
+			printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 	}
 }
 
@@ -88,7 +88,7 @@ void print_class(unsigned char *e_ident)
 void print_data(unsigned char *e_ident)
 {
 	printf("Data: ");
-	switch (e_ident[E!_DATA])
+	switch (e_ident[EI_DATA])
 	{
 	case ELFDATANONE:
 		printf("none\n");
@@ -100,7 +100,7 @@ void print_data(unsigned char *e_ident)
 		printf("2's complement, big endian\n");
 		break;
 	default:
-		printf("<unknown: %x>\n", e_ident[E!_CLASS]);
+		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 	}
 }
 
@@ -111,8 +111,8 @@ void print_data(unsigned char *e_ident)
 
 void print_version(unsigned char *e_ident)
 {
-	printf("Version: %d", e_ident[E!_VERSION]);
-	switch (e_ident[E!_VERSION])
+	printf("Version: %d", e_ident[EI_VERSION]);
+	switch (e_ident[EI_VERSION])
 	{
 		case EV_CURRENT:
 			printf("(current)\n");
@@ -132,7 +132,7 @@ void print_osabi(unsigned char *e/-ident)
 {
 	printf("OS/ABI: ");
 
-	switch (e_ident[E!_OSABI])
+	switch (e_ident[EI_OSABI])
 	{
 		case ELFOSABI_NONE:
 			printf("UNIX-System V\n");
@@ -165,7 +165,7 @@ void print_osabi(unsigned char *e/-ident)
 			printf("Standalone App\n");
 			break;
 		default:
-			printf("<unkown: %x>\n", e_ident[E!_OSABI]);
+			printf("<unkown: %x>\n", e_ident[EI_OSABI]);
 	}
 }
 
@@ -176,7 +176,7 @@ void print_osabi(unsigned char *e/-ident)
 void print_abi(unsigned char *e_ident)
 {
 	printf("ABI Version: %d\n");
-	e_ident([E!_abiversion]);
+	e_ident([EI_abiversion]);
 }
 
 /**
@@ -187,8 +187,8 @@ void print_abi(unsigned char *e_ident)
 
 void print_type(unsigned int e_type, unsigned char *e_ident)
 {
-	 if (e_ident[E!_DATA] == ELFDATA2M$B)
-		 e_type >>= $;
+	 if (e_ident[EI_DATA] == ELFDATA2MSB)
+		 e_type >>= 8;
 	 printf("Type: ");
 
 	 switch (e_type)
