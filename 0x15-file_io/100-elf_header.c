@@ -260,35 +260,19 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 
 void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
-	int j = 0, l = 0;
-	unsigned char *p = (unsigned char *)&e_entry;
-
-	printf(" Entry point address:                    0x");
+	printf(" Entry point address:                    ");
 
 	if (e_ident[EI_DATA] != ELFDATA2MSB)
 	{
-		j = e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
-		while (!p[j])
-			j--;
-		printf("%x", p[j--]);
-		for (; j >= 0; j--)
-			printf("%02x", p[j]);
-		printf("\n");
+		e_entry = ((e_entry << 8) & 0xFF00FF00) |
+			((e_entry >> 8) & 0xFF00FF);
+		e_entry = (e_entry << 16) | (e_entry >> 16);
 	}
-	else
-	{
-	       j = 0;
-	       l = e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
-		while (!p[j])
-		{
-			j++;
-			printf("%x", p[j++]);
-		}
-		for (; j <= l; j++)
-			printf("%02x", p[j]);
-
-	       printf("\n");
-	}
+	
+       if (e_ident[EI_CLASS] == ELFCLASS32)
+	       printf("%#x\n", (unsigned int)e_entry);
+       else
+	       printf("%#lx\n", e_entry);
 }
 
 /**
