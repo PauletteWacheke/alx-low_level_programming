@@ -301,7 +301,7 @@ void close_elf(int elf)
 {
 	if (close(elf) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: CAn't close fd %d\n", elf);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", elf);
 		exit(98);
 	}
 }
@@ -317,17 +317,11 @@ void close_elf(int elf)
  *
  */
 
-int main(int argc, char **argv)
+int main(int __attribute__((__unused__)) argc, char **argv)
 {
 	Elf64_Ehdr *header;
-	int f;
-	ssize_t r;
-
-	if (argc != 2)
-	{
-		dprintf(STDERR_FILENO, "Usage: elf_header elf_filename\n");
-		exit(98);
-	}
+	int f, r;
+	
 	f = open(argv[1], O_RDONLY);
 	if (f == -1)
 	{
@@ -335,10 +329,18 @@ int main(int argc, char **argv)
 		exit(98);
 	}
 	header = malloc(sizeof(Elf64_Ehdr));
-	r = read(f, header, sizeof(Elf64_Ehdr));
-	if (r < 1 || r != sizeof(Elf64_Ehdr))
+	if (header == NULL)
 	{
+		close_elf(f);
 		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+		exit(98);
+	}
+	r = read(f, header, sizeof(Elf64_Ehdr));
+	if (r == -1)
+	{
+		free(header);
+		close_elf(f);
+		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
 		exit(98);
 	}
 
@@ -354,12 +356,8 @@ int main(int argc, char **argv)
 	print_type(header->e_type, header->e_ident);
 	print_entry(header->e_entry, header->e_ident);
 
-	if (close(f))
-	{
-		dprintf(STDERR_FILENO, "Error: Closing file descriptor: %d\n", f);
-		exit(98);
-	}
+
 	free(header);
-	close_elf(0);
-	return (EXIT_SUCCESS);
+	close_elf(f);
+	return (0);
 }
