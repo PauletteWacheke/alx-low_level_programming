@@ -5,7 +5,7 @@
  *
  * @ht: hash table to look into.
  * @key: key to find
- * 
+ *
  * Return: value associated with the element, NULL if key not found
  */
 
